@@ -1,7 +1,7 @@
 ﻿ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Data.SqlClient;
+using System.Data.SqlClient; 
 
 public class DbManager : MonoBehaviour
 {
@@ -28,7 +28,7 @@ public class DbManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-        }
+        }   
         else if (instance != this)
         {
             Destroy(gameObject);

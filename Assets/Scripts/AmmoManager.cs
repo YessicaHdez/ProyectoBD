@@ -25,6 +25,8 @@ public class AmmoManager : MonoBehaviour
     [SerializeField] private Text swords;
     [SerializeField] private Text arrows;
 
+    bool up = true;
+
     void Start()
     {
         InitializeAmmo();
@@ -72,16 +74,18 @@ public class AmmoManager : MonoBehaviour
                                 break;
                         }
                         i++;
+                        UpdateCounter();
                     }
                     if (i == 0)
                     {
-                        using (SqlCommand command2 = new SqlCommand("dbo.RegisterUser", DbManager.instance.Connection))
+                        using (SqlCommand command2 = new SqlCommand("dbo.InitializeAmmo", DbManager.instance.Connection))
                         {
                             command2.CommandType = System.Data.CommandType.StoredProcedure;
                             command2.Parameters.AddWithValue("@PlayerName", GameManager.PlayerName);
                             command2.ExecuteNonQuery();
                         }
                         InitializeAmmo();
+                        UpdateCounter();
                     }
 
 
@@ -99,6 +103,7 @@ public class AmmoManager : MonoBehaviour
     {
         swords.text = "x" + inventory.Swords;
         arrows.text = "x" + inventory.Arrows;
+        up = true;
     }
 
     void Sync()
@@ -167,7 +172,10 @@ public class AmmoManager : MonoBehaviour
 
     void Update()
     {
-        
+        if(inventory.Swords == 0 && used.Swords == 0)
+        {
+            InitializeAmmo();
+        }
     }
 
     

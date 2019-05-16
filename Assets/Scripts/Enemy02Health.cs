@@ -65,7 +65,13 @@ public class Enemy02Health : MonoBehaviour
 
     void TakeHit(int damage, AmmoTypo t)
     {
-        if(currrentHealth > 0)
+        if (startingHealth == 0)
+        {
+            EnemyTypo e = GetComponent<EnemyTypo>();
+            startingHealth = e.health;
+            currrentHealth = startingHealth;
+        }
+        if (currrentHealth > 0)
         {
             animator.Play("Hurt");
             currrentHealth -= damage;

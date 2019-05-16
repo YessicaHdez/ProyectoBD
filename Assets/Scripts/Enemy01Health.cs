@@ -32,6 +32,7 @@ public class Enemy01Health : MonoBehaviour
     {
         EnemyTypo e = GetComponent<EnemyTypo>();
         startingHealth = e.health;
+        Debug.Log(e.health);
         id = e.id;
         rigidbody = GetComponent<Rigidbody>();
         capsuleCollider = GetComponent<CapsuleCollider>();
@@ -64,6 +65,12 @@ public class Enemy01Health : MonoBehaviour
 
     void TakeHit(int damage, AmmoTypo t)
     {
+        if(startingHealth == 0)
+        {
+            EnemyTypo e = GetComponent<EnemyTypo>();
+            startingHealth = e.health;
+            currrentHealth = startingHealth;
+        }
         if(currrentHealth > 0)
         {
             animator.Play("Hit");
