@@ -1,0 +1,19 @@
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE EnemySP
+	@Name nchar(40),
+	@Damage int ,
+	@Health int
+AS
+BEGIN
+	SET NOCOUNT ON;
+	BEGIN TRANSACTION
+	INSERT INTO Enemy(Name, Damage) VALUES (@Name, @Damage, @Health);
+	IF @@ERROR = 0
+		COMMIT
+	ELSE
+		ROLLBACK
+END
+GO

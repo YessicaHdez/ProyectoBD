@@ -1,0 +1,19 @@
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE WeaponSP
+	@Kind float,
+	@DefAmmo int,
+	@name nchar(40)
+AS
+BEGIN
+	SET NOCOUNT ON;
+	BEGIN TRANSACTION
+	INSERT INTO Weapon(Kind,DefAmmo,Name) VALUES (@Kind, @DefAmmo, @name)
+	IF @@ERROR = 0
+		COMMIT
+	ELSE
+		ROLLBACK
+END
+GO
